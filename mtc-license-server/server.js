@@ -72,8 +72,8 @@ function clientIp(req) {
 }
 async function log(type, extra) {
   await db.collection('logs').insertOne({ ts: Date.now(), type, ...extra });
-  const logs = db._state().logs;
-  if (logs.length > 2000) logs.splice(0, logs.length - 2000); // keep it bounded
+ const logs = db._state().logs;
+if (Array.isArray(logs) && logs.length > 2000) logs.splice(0, logs.length - 2000);
 }
 function defaultPermissions() {
   return {
